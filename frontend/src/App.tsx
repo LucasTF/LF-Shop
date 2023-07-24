@@ -1,13 +1,16 @@
+import Content from "./layout/Content/Content";
+import Footer from "./layout/Footer/Footer";
 import Header from "./layout/Header/Header";
 
 function App() {
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-gray-800">
       <Header />
-      <main className="bg-gray-800 h-screen pt-16">
-        <p className="text-center text-white text-xl">Hello World</p>
-      </main>
-    </>
+      <Content>
+        <p>Hello World</p>
+      </Content>
+      <Footer />
+    </div>
   );
 }
 

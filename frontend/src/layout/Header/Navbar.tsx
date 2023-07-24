@@ -1,7 +1,7 @@
 import { useState } from "react";
-
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
+
 import { ButtonLink } from "../../components/UI/Button/Button";
 
 const Navbar = () => {
