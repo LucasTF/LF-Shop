@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { CgClose } from "react-icons/cg";
@@ -29,16 +30,16 @@ const Navbar = () => {
       >
         <ul className="[&>li>a]:block [&>li]:p-2 [&>li]:m-3 [&>li]:bg-gray-800 [&>li]:rounded [&>li:hover]:text-cyan-500 [&>li]:transition [&>li]:duration-200 lg:flex lg:space-x-4 lg:[&>li]:p-0 lg:[&>li]:m-0 lg:[&>li]:bg-inherit">
           <li>
-            <a href="#">Início</a>
+            <Link to="/">Início</Link>
           </li>
           <li>
-            <a href="#">Item</a>
+            <Link to="/">Item</Link>
           </li>
           <li>
-            <a href="#">Item</a>
+            <Link to="/">Item</Link>
           </li>
           <li>
-            <a href="#">Item</a>
+            <Link to="/">Item</Link>
           </li>
         </ul>
         <div className="h-full border-2 border-gray-800 max-lg:hidden"></div>
@@ -46,12 +47,14 @@ const Navbar = () => {
           <ButtonLink
             text="Carrinho"
             icon={<FaShoppingCart />}
+            to="/"
             className="hover:text-cyan-500 transition duration-200"
           />
           <ButtonLink
-            className="bg-green-700 hover:bg-green-600 transition duration-200"
             text="Login"
             icon={<FaUser />}
+            to="/"
+            className="bg-green-700 hover:bg-green-600 transition duration-200"
           />
         </div>
       </nav>

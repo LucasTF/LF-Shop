@@ -1,9 +1,11 @@
+import { Link, LinkProps } from "react-router-dom";
+
 interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
   text: string;
   icon?: React.ReactNode;
 }
 
-interface ButtonLinkProps extends React.ComponentPropsWithoutRef<"a"> {
+interface ButtonLinkProps extends LinkProps {
   text: string;
   icon?: React.ReactNode;
 }
@@ -30,7 +32,7 @@ export const ButtonLink = ({
   ...props
 }: ButtonLinkProps) => {
   return (
-    <a
+    <Link
       {...props}
       className={
         "flex p-2 items-center cursor-pointer rounded" + " " + className
@@ -39,6 +41,6 @@ export const ButtonLink = ({
     >
       {icon}
       <span className="ml-2">{text}</span>
-    </a>
+    </Link>
   );
 };
