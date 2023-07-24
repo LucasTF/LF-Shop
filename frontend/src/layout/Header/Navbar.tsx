@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
+import { CgClose } from "react-icons/cg";
 
 import { ButtonLink } from "../../components/UI/Button/Button";
 
@@ -17,7 +18,7 @@ const Navbar = () => {
         className="cursor-pointer text-xl p-1 rounded border-2 border-gray-800 lg:hidden"
         onClick={() => setShowNav((currState) => !currState)}
       >
-        <FiMenu />
+        {showNav ? <CgClose /> : <FiMenu />}
       </button>
       <nav
         className={
@@ -28,7 +29,7 @@ const Navbar = () => {
       >
         <ul className="[&>li>a]:block [&>li]:p-2 [&>li]:m-3 [&>li]:bg-gray-800 [&>li]:rounded [&>li:hover]:text-cyan-500 [&>li]:transition [&>li]:duration-200 lg:flex lg:space-x-4 lg:[&>li]:p-0 lg:[&>li]:m-0 lg:[&>li]:bg-inherit">
           <li>
-            <a href="#">Item</a>
+            <a href="#">Início</a>
           </li>
           <li>
             <a href="#">Item</a>
