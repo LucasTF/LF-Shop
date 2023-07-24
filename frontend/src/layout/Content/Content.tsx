@@ -3,7 +3,7 @@ const Content = ({
   ...props
 }: React.ComponentPropsWithoutRef<"main">) => {
   return (
-    <main {...props} className="pt-16">
+    <main {...props} className="text-white pt-16">
       {children}
     </main>
   );
