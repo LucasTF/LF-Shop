@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { CgClose } from "react-icons/cg";
@@ -8,6 +8,11 @@ import { ButtonLink } from "../../components/UI/Button/Button";
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setShowNav(false);
+  }, [pathname]);
 
   let drawerAnimation = showNav
     ? "translate-y-0 opacity-1"
