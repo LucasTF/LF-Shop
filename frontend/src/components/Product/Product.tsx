@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import Rating from "./Rating";
+
 import { Product as ProductAttributes } from "../../utils/products";
 import { BRLFormatter } from "../../utils/currencyFormatter";
 
@@ -17,9 +19,10 @@ const Product = ({ product }: ProductProps) => {
         <Link to={`/product/${product._id}`}>
           <p className="font-semibold">{product.name}</p>
         </Link>
-        <h3 className="text-lg md:text-2xl my-2">
-          {BRLFormatter(product.price)}
-        </h3>
+        <div className="my-2">
+          <Rating value={product.rating} text={product.numReviews} />
+        </div>
+        <h3 className="text-lg md:text-2xl">{BRLFormatter(product.price)}</h3>
       </div>
     </div>
   );
