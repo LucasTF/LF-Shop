@@ -1,13 +1,13 @@
-import Product from "../components/Product/Product";
+import Product from "../components/Home/Product";
 import products from "../utils/products";
 
 const HomePage = () => {
   return (
-    <section className="my-4">
+    <section>
       <h2 className="text-center font-bold my-4">Últimos produtos</h2>
-      <div className="grid grid-cols-2 gap-2 mx-2 md:gap-5 md:mx-16 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="grid grid-cols-2 gap-2 mx-2 md:mx-8 md:gap-5 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         {products.map((product) => (
-          <Product product={product} />
+          <Product key={product._id} product={product} />
         ))}
       </div>
     </section>

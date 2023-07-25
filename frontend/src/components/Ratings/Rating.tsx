@@ -1,11 +1,11 @@
 import RatingStar from "./RatingStar";
 
 type RatingProps = {
-  value: number;
-  text: string | number;
+  value?: number;
+  text?: string | number;
 };
 
-const Rating = ({ value, text }: RatingProps) => {
+const Rating = ({ value = 0, text }: RatingProps) => {
   return (
     <div className="flex">
       <RatingStar value={value} />

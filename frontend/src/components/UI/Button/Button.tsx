@@ -15,7 +15,9 @@ export const Button = ({ text, icon, className, ...props }: ButtonProps) => {
     <button
       {...props}
       className={
-        "flex p-2 items-center cursor-pointer rounded" + " " + className
+        "flex p-2 items-center cursor-pointer rounded w-fit disabled:cursor-not-allowed" +
+        " " +
+        className
       }
       onClick={props.onClick}
     >
@@ -35,7 +37,9 @@ export const ButtonLink = ({
     <Link
       {...props}
       className={
-        "flex p-2 items-center cursor-pointer rounded" + " " + className
+        "flex p-2 items-center cursor-pointer rounded w-fit disabled:cursor-not-allowed" +
+        " " +
+        className
       }
       onClick={props.onClick}
     >
