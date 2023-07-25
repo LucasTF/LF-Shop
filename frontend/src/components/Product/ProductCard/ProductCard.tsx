@@ -1,12 +1,12 @@
 import { FaShoppingCart } from "react-icons/fa";
 
-import { Product as ProductAttributes } from "../../../utils/products";
+import { Product as ProductAttributes } from "../../../definitions";
 
 import Rating from "../../Ratings/Rating";
 import Card from "../../UI/Card/Card";
 import { Button } from "../../UI/Button/Button";
-import ProductPrice from "./ProductCardPrice";
 import ProductCardStock from "./ProductCardStock";
+import ProductCardPrice from "./ProductCardPrice";
 
 type ProductProps = {
   product: ProductAttributes;
@@ -29,8 +29,8 @@ const Product = ({ product }: ProductProps) => {
         </div>
         {product.countInStock > 0 && (
           <div className="grid gap-1 my-4 xl:gap-4">
-            <ProductPrice value={product.price} label="à vista" />
-            <ProductPrice
+            <ProductCardPrice value={product.price} label="à vista" />
+            <ProductCardPrice
               value={product.price / 10}
               label="em até 10x sem juros"
             />

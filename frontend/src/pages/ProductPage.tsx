@@ -1,15 +1,25 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 
-import products from "../utils/products";
+import { Product } from "../definitions";
 
 import { ButtonLink } from "../components/UI/Button/Button";
-import Product from "../components/Product/ProductCard/ProductCard";
+import ProductCard from "../components/Product/ProductCard/ProductCard";
 
 const ProductPage = () => {
+  const [product, setProduct] = useState<Product>();
   const { id: productId } = useParams();
 
-  const product = products.find((p) => p._id === productId);
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${productId}`);
+      setProduct(data);
+    };
+
+    fetchProduct();
+  }, []);
 
   return (
     <section className="max-sm:mx-4 2xl:mx-auto 2xl:w-3/4">
@@ -20,7 +30,7 @@ const ProductPage = () => {
         to="/"
       />
       <section className="my-4">
-        <Product product={product!} />
+        {product && <ProductCard product={product} />}
       </section>
     </section>
   );

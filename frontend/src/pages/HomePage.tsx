@@ -1,7 +1,21 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import Product from "../components/Home/Product";
-import products from "../utils/products";
+import { Product as ProductAttributes } from "../definitions";
 
 const HomePage = () => {
+  const [products, setProducts] = useState<ProductAttributes[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get("/api/products");
+      setProducts(data);
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <section>
       <h2 className="text-center font-bold my-4">Últimos produtos</h2>
