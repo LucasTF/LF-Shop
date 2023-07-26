@@ -49,18 +49,8 @@ const Navbar = () => {
         </ul>
         <div className="h-full border-2 border-gray-800 max-lg:hidden"></div>
         <div className="border-b-2 border-t-gray-300 py-2 flex justify-center space-x-2 lg:border-0 max-lg:w-full">
-          <ButtonLink
-            text="Carrinho"
-            icon={<FaShoppingCart />}
-            to="/"
-            className="hover:text-cyan-500 transition duration-200"
-          />
-          <ButtonLink
-            text="Login"
-            icon={<FaUser />}
-            to="/"
-            className="bg-green-700 hover:bg-green-600 transition duration-200"
-          />
+          <ButtonLink text="Carrinho" icon={<FaShoppingCart />} to="/" />
+          <ButtonLink text="Login" icon={<FaUser />} mode="confirm" to="/" />
         </div>
       </nav>
     </>

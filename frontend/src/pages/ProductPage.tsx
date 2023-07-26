@@ -24,7 +24,7 @@ const ProductPage = () => {
   return (
     <section className="max-sm:mx-4 2xl:mx-auto 2xl:w-3/4">
       <ButtonLink
-        className="p-2 my-4 hover:text-cyan-500 transition duration-200"
+        className="p-2 my-4"
         icon={<FaArrowLeft />}
         text="Voltar"
         to="/"

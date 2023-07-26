@@ -39,7 +39,8 @@ const Product = ({ product }: ProductProps) => {
         <Button
           icon={<FaShoppingCart />}
           text="Adicionar ao carrinho"
-          className="bg-green-700 w-full justify-center active:bg-green-600 hover:bg-green-600 disabled:bg-gray-600 transition duration-200 xl:mt-auto"
+          className="w-full justify-center xl:mt-auto"
+          mode="confirm"
           disabled={product.countInStock === 0}
         />
       </div>
