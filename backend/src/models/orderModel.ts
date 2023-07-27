@@ -11,7 +11,8 @@ type OrderItemType = {
 type ShippingAddressType = {
   address: string;
   city: string;
-  cep: string;
+  postalCode: string;
+  country: string;
 };
 
 type PaymentResultsType = {
@@ -28,6 +29,7 @@ interface OrderSchema {
   paymentMethod: string;
   paymentResults: PaymentResultsType;
   itemsPrice: number;
+  taxPrice: number;
   shippingPrice: number;
   totalPrice: number;
   isPaid: boolean;
@@ -59,7 +61,8 @@ const orderSchema = new mongoose.Schema<OrderSchema>(
     shippingAddress: {
       address: { type: String, required: true },
       city: { type: String, required: true },
-      cep: { type: String, required: true },
+      postalCode: { type: String, required: true },
+      country: { type: String, required: true },
     },
     paymentMethod: {
       type: String,
@@ -72,6 +75,11 @@ const orderSchema = new mongoose.Schema<OrderSchema>(
       email_address: { type: String },
     },
     itemsPrice: {
+      type: Number,
+      required: true,
+      default: 0.0,
+    },
+    taxPrice: {
       type: Number,
       required: true,
       default: 0.0,
