@@ -1,5 +1,4 @@
 export type Product = {
-  _id: number | string;
   name: string;
   image: string;
   description: string;
@@ -13,7 +12,6 @@ export type Product = {
 
 const products: Product[] = [
   {
-    _id: "1",
     name: "Airpods Fones de Ouvido Wireless Bluetooth",
     image: "/images/airpods.jpg",
     description:
@@ -26,7 +24,6 @@ const products: Product[] = [
     numReviews: 12,
   },
   {
-    _id: "2",
     name: "iPhone 11 Pro 256GB de Memória",
     image: "/images/phone.jpg",
     description:
@@ -39,7 +36,6 @@ const products: Product[] = [
     numReviews: 8,
   },
   {
-    _id: "3",
     name: "Camera Cannon EOS 80D DSLR",
     image: "/images/camera.jpg",
     description:
@@ -52,7 +48,6 @@ const products: Product[] = [
     numReviews: 12,
   },
   {
-    _id: "4",
     name: "Sony Playstation 4 Pro - Branco",
     image: "/images/playstation.jpg",
     description:
@@ -65,7 +60,6 @@ const products: Product[] = [
     numReviews: 12,
   },
   {
-    _id: "5",
     name: "Mouse Gamer Logitech G-Series",
     image: "/images/mouse.jpg",
     description:
@@ -78,7 +72,6 @@ const products: Product[] = [
     numReviews: 10,
   },
   {
-    _id: "6",
     name: "Amazon Echo Dot 3º Geração",
     image: "/images/alexa.jpg",
     description:
