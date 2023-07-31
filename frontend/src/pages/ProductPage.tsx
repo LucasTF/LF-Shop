@@ -1,25 +1,24 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 
-import { Product } from "../definitions/types";
-
 import { ButtonLink } from "../components/UI/Button/Button";
 import ProductCard from "../components/Product/ProductCard/ProductCard";
+import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 
 const ProductPage = () => {
-  const [product, setProduct] = useState<Product>();
   const { id: productId } = useParams();
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      const { data } = await axios.get(`/api/products/${productId}`);
-      setProduct(data);
-    };
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useGetProductDetailsQuery(productId!);
 
-    fetchProduct();
-  }, []);
+  const ProductMainContent = () => {
+    if (isLoading) return <h2>Loading...</h2>;
+    else if (error) return <h2>Falha ao recuperar dados do produto</h2>;
+    return <>{product && <ProductCard product={product} />}</>;
+  };
 
   return (
     <section className="max-sm:mx-4 2xl:mx-auto 2xl:w-3/4">
@@ -30,7 +29,7 @@ const ProductPage = () => {
         to="/"
       />
       <section className="my-4">
-        {product && <ProductCard product={product} />}
+        <ProductMainContent />
       </section>
     </section>
   );

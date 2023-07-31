@@ -4,7 +4,7 @@ import { useGetProductsQuery } from "../slices/productsApiSlice";
 const HomePage = () => {
   const { data: products, isLoading, error } = useGetProductsQuery("");
 
-  const MainProductList = () => {
+  const ProductsMainList = () => {
     if (isLoading) return <h2>Loading...</h2>;
     else if (error) return <h2>Erro ao recuperar produtos</h2>;
     return (
@@ -21,7 +21,7 @@ const HomePage = () => {
 
   return (
     <section>
-      <MainProductList />
+      <ProductsMainList />
     </section>
   );
 };
