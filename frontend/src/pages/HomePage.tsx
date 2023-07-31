@@ -1,13 +1,16 @@
 import { useGetProductsQuery } from "../slices/productsApiSlice";
+
 import Product from "../components/Home/Product";
 import Loader from "../components/UI/Loader/Loader";
+import Message from "../components/UI/Message/Message";
 
 const HomePage = () => {
   const { data: products, isLoading, error } = useGetProductsQuery("");
 
   const ProductsMainList = () => {
     if (isLoading) return <Loader />;
-    else if (error) return <h2>Erro ao recuperar produtos</h2>;
+    else if (error)
+      return <Message type="danger" text="Erro ao recuperar produtos." />;
     return (
       <>
         <h2 className="text-center text-2xl font-bold my-4">

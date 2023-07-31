@@ -5,6 +5,7 @@ import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 import { ButtonLink } from "../components/UI/Button/Button";
 import ProductCard from "../components/Product/ProductCard/ProductCard";
 import Loader from "../components/UI/Loader/Loader";
+import Message from "../components/UI/Message/Message";
 
 const ProductPage = () => {
   const { id: productId } = useParams();
@@ -17,7 +18,10 @@ const ProductPage = () => {
 
   const ProductMainContent = () => {
     if (isLoading) return <Loader />;
-    else if (error) return <h2>Falha ao recuperar dados do produto</h2>;
+    else if (error)
+      return (
+        <Message type="danger" text="Falha ao recuperar dados do produto" />
+      );
     return <>{product && <ProductCard product={product} />}</>;
   };
 
