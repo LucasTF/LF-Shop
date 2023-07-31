@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import Product from "../components/Home/Product";
-import { Product as ProductAttributes } from "../definitions";
+import { Product as ProductAttributes } from "../definitions/types";
 
 const HomePage = () => {
   const [products, setProducts] = useState<ProductAttributes[]>([]);

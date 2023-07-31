@@ -1,6 +1,6 @@
 import { FaShoppingCart } from "react-icons/fa";
 
-import { Product as ProductAttributes } from "../../../definitions";
+import { Product as ProductAttributes } from "../../../definitions/types";
 
 import Rating from "../../Ratings/Rating";
 import Card from "../../UI/Card/Card";

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 
-import { Product } from "../definitions";
+import { Product } from "../definitions/types";
 
 import { ButtonLink } from "../components/UI/Button/Button";
 import ProductCard from "../components/Product/ProductCard/ProductCard";
