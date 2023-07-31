@@ -11,10 +11,11 @@ import ProductCardPrice from "./ProductCardPrice";
 
 type ProductProps = {
   product: ProductAttributes;
+  onAddToCart: (quantity: number) => void;
 };
 
-const Product = ({ product }: ProductProps) => {
-  const [quantity, setQuantity] = useState(0);
+const ProductCard = ({ product, onAddToCart }: ProductProps) => {
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="grid gap-2 md:grid-cols-4 md:gap-1">
@@ -70,10 +71,11 @@ const Product = ({ product }: ProductProps) => {
             className="w-full justify-center xl:mt-auto"
             mode="confirm"
             disabled={product.countInStock === 0}
+            onClick={() => onAddToCart(quantity)}
           />
         </div>
       </Card>
     </div>
   );
 };
-export default Product;
+export default ProductCard;

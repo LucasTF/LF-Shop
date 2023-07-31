@@ -1,15 +1,21 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { FaArrowLeft } from "react-icons/fa";
 
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
+
 import { ButtonLink } from "../components/UI/Button/Button";
 import Content from "../layout/Content/Content";
 import ProductCard from "../components/Product/ProductCard/ProductCard";
 import Loader from "../components/UI/Loader/Loader";
 import Message from "../components/UI/Message/Message";
+import { addToCart } from "../slices/cartSlice";
 
 const ProductPage = () => {
   const { id: productId } = useParams();
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const {
     data: product,
@@ -17,13 +23,24 @@ const ProductPage = () => {
     error,
   } = useGetProductDetailsQuery(productId!);
 
+  const addToCartHandler = (quantity: number) => {
+    dispatch(addToCart({ ...product, quantity }));
+    navigate("/cart");
+  };
+
   const ProductMainContent = () => {
     if (isLoading) return <Loader />;
     else if (error)
       return (
         <Message type="danger" text="Falha ao recuperar dados do produto" />
       );
-    return <>{product && <ProductCard product={product} />}</>;
+    return (
+      <>
+        {product && (
+          <ProductCard onAddToCart={addToCartHandler} product={product} />
+        )}
+      </>
+    );
   };
 
   return (
