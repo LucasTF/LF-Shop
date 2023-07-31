@@ -1,5 +1,5 @@
 export type Product = {
-  _id: number | string;
+  _id: string;
   name: string;
   image: string;
   description: string;
@@ -9,4 +9,16 @@ export type Product = {
   countInStock: number;
   rating: number;
   numReviews: number;
+};
+
+export type CartItem = {
+  _id: string;
+  quantity: number;
+  price: number;
+};
+
+export type Cart = {
+  cartItems: CartItem[];
+  itemsPrice: number;
+  shippingPrice: number;
 };
