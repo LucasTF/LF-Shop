@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 
+import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 import { ButtonLink } from "../components/UI/Button/Button";
 import ProductCard from "../components/Product/ProductCard/ProductCard";
-import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
+import Loader from "../components/UI/Loader/Loader";
 
 const ProductPage = () => {
   const { id: productId } = useParams();
@@ -15,7 +16,7 @@ const ProductPage = () => {
   } = useGetProductDetailsQuery(productId!);
 
   const ProductMainContent = () => {
-    if (isLoading) return <h2>Loading...</h2>;
+    if (isLoading) return <Loader />;
     else if (error) return <h2>Falha ao recuperar dados do produto</h2>;
     return <>{product && <ProductCard product={product} />}</>;
   };
