@@ -3,6 +3,7 @@ import { useGetProductsQuery } from "../slices/productsApiSlice";
 import Product from "../components/Home/Product";
 import Loader from "../components/UI/Loader/Loader";
 import Message from "../components/UI/Message/Message";
+import Content from "../layout/Content/Content";
 
 const HomePage = () => {
   const { data: products, isLoading, error } = useGetProductsQuery("");
@@ -12,7 +13,7 @@ const HomePage = () => {
     else if (error)
       return <Message type="danger" text="Erro ao recuperar produtos." />;
     return (
-      <>
+      <Content>
         <h2 className="text-center text-2xl font-bold my-4">
           Últimos produtos
         </h2>
@@ -21,7 +22,7 @@ const HomePage = () => {
             <Product key={product._id} product={product} />
           ))}
         </div>
-      </>
+      </Content>
     );
   };
 
