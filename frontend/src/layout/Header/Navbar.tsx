@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { CgClose } from "react-icons/cg";
 
 import { ButtonLink } from "../../components/UI/Button/Button";
+import { RootState } from "../../store";
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
+  const { cartItems } = useSelector((state: RootState) => state.cart);
+
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -48,8 +52,14 @@ const Navbar = () => {
           </li>
         </ul>
         <div className="h-full border-2 border-gray-800 max-lg:hidden"></div>
-        <div className="border-b-2 border-t-gray-300 py-2 flex justify-center space-x-2 lg:border-0 max-lg:w-full">
-          <ButtonLink text="Carrinho" icon={<FaShoppingCart />} to="/" />
+        <div className="border-b-2 border-t-gray-300 py-2 flex justify-center items-center space-x-2 lg:border-0 max-lg:w-full">
+          <ButtonLink text="Carrinho" icon={<FaShoppingCart />} to="/">
+            {cartItems.length > 0 && (
+              <p className="ml-2 px-2 font-bold bg-green-700 rounded-full">
+                {cartItems.reduce((a, c) => a + c.quantity, 0)}
+              </p>
+            )}
+          </ButtonLink>
           <ButtonLink text="Login" icon={<FaUser />} mode="confirm" to="/" />
         </div>
       </nav>

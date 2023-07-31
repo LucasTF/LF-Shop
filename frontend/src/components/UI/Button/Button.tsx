@@ -61,6 +61,7 @@ export const ButtonLink = ({
   icon,
   mode,
   className,
+  children,
   ...props
 }: ButtonLinkProps) => {
   return (
@@ -71,6 +72,7 @@ export const ButtonLink = ({
     >
       {icon}
       <span className={label()}>{text}</span>
+      {children}
     </Link>
   );
 };
