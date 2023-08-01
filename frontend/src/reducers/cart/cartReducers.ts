@@ -1,10 +1,12 @@
-import { Cart } from "../../definitions/types";
+import { Cart, CartItem } from "../../definitions/types";
 import addTwoDecimals from "../../utils/addTwoDecimals";
 
-export const addToCartReducer = (
-  state: Cart,
-  action: { payload: any; type: string }
-) => {
+type Action<T> = {
+  payload: T;
+  type: string;
+};
+
+export const addToCartReducer = (state: Cart, action: Action<CartItem>) => {
   const item = action.payload;
 
   const existItem = state.cartItems.find((ci) => ci._id === item._id);
@@ -15,6 +17,24 @@ export const addToCartReducer = (
     );
   else state.cartItems = [...state.cartItems, item];
 
+  updateStorageCart(state);
+};
+
+export const removeFromCartReducer = (state: Cart, action: Action<string>) => {
+  state.cartItems = state.cartItems.filter(
+    (item) => item._id !== action.payload
+  );
+
+  updateStorageCart(state);
+};
+
+export const clearCartReducer = (state: Cart) => {
+  state.cartItems = [];
+
+  updateStorageCart(state);
+};
+
+const updateStorageCart = (state: Cart) => {
   // Items Price
   state.itemsPrice = addTwoDecimals(
     state.cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)

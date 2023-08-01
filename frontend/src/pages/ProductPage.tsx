@@ -32,7 +32,7 @@ const ProductPage = () => {
     if (isLoading) return <Loader />;
     else if (error)
       return (
-        <Message type="danger" text="Falha ao recuperar dados do produto" />
+        <Message type="danger">Falha ao recuperar dados do produto</Message>
       );
     return (
       <>

@@ -53,7 +53,7 @@ const Navbar = () => {
         </ul>
         <div className="h-full border-2 border-gray-800 max-lg:hidden"></div>
         <div className="border-b-2 border-t-gray-300 py-2 flex justify-center items-center space-x-2 lg:border-0 max-lg:w-full">
-          <ButtonLink text="Carrinho" icon={<FaShoppingCart />} to="/">
+          <ButtonLink text="Carrinho" icon={<FaShoppingCart />} to="/cart">
             {cartItems.length > 0 && (
               <p className="ml-2 px-2 font-bold bg-green-700 rounded-full">
                 {cartItems.reduce((a, c) => a + c.quantity, 0)}

@@ -2,7 +2,7 @@ import { tv } from "tailwind-variants";
 
 const content = tv({
   slots: {
-    base: "flex-1 text-white pt-16 md:w-11/12 lg:w-3/4 md:mx-auto",
+    base: "flex-1 text-white py-16 max-sm:px-4 md:w-11/12 md:mx-auto lg:w-4/5",
   },
 });
 

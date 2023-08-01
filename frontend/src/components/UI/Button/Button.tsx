@@ -17,11 +17,11 @@ type ButtonLinkProps = LinkProps &
 const button = tv({
   slots: {
     base: "flex p-2 items-center cursor-pointer rounded w-fit",
-    label: "ml-2",
   },
   variants: {
     mode: {
       confirm: "bg-green-700 hover:bg-green-600 transition duration-200",
+      danger: "bg-red-700 hover:bg-red-600 transition duration-200",
       default: "hover:text-cyan-500 transition duration-200",
     },
     disabled: {
@@ -32,8 +32,6 @@ const button = tv({
     mode: "default",
   },
 });
-
-const { label } = button();
 
 export const Button = ({
   text,
@@ -51,7 +49,7 @@ export const Button = ({
       {...props}
     >
       {icon}
-      <span className={label()}>{text}</span>
+      <span className={icon ? "ml-2" : ""}>{text}</span>
     </button>
   );
 };
@@ -71,7 +69,7 @@ export const ButtonLink = ({
       onClick={props.onClick}
     >
       {icon}
-      <span className={label()}>{text}</span>
+      <span className={icon ? "ml-2" : ""}>{text}</span>
       {children}
     </Link>
   );

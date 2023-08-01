@@ -11,7 +11,7 @@ const HomePage = () => {
   const ProductsMainList = () => {
     if (isLoading) return <Loader />;
     else if (error)
-      return <Message type="danger" text="Erro ao recuperar produtos." />;
+      return <Message type="danger">Falha ao recuperar produtos.</Message>;
     return (
       <Content>
         <h2 className="text-center text-2xl font-bold my-4">

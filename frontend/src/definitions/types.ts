@@ -13,8 +13,10 @@ export type Product = {
 
 export type CartItem = {
   _id: string;
+  name: string;
   quantity: number;
   price: number;
+  image: string;
 };
 
 export type Cart = {
