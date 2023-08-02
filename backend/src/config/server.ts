@@ -7,6 +7,12 @@ import { errorHandler, notFound } from "../middleware/errorMiddleware";
 const serverSetup = () => {
   const server = express();
 
+  // JSON Body Parser Middleware
+  server.use(express.json());
+
+  // URLEncoded Body Parser Middleware
+  server.use(express.urlencoded({ extended: true }));
+
   // Routes
   server.use("/api/products", productRoutes);
   server.use("/api/users", userRoutes);
@@ -16,12 +22,6 @@ const serverSetup = () => {
 
   // Error Handler Middleware
   server.use(errorHandler);
-
-  // JSON Body Parser Middleware
-  server.use(express.json());
-
-  // URLEncoded Body Parser Middleware
-  server.use(express.urlencoded({ extended: true }));
 
   server.get("/", (req, res) => {
     res.send("API is running...");

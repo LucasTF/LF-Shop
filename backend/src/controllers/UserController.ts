@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import jwt from "jsonwebtoken";
 
 import Controller from "./Controller";
 import User from "../models/userModel";
@@ -17,7 +18,32 @@ class UserController implements UserControllerInterface {
   // @route POST /api/users/auth
   // @access Public
   auth = asyncHandler(async (req, res) => {
-    res.send("auth user");
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email: email });
+
+    if (user && (await user.matchPasswords(password))) {
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, {
+        expiresIn: "30d",
+      });
+
+      res.cookie("jwt", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== "development",
+        sameSite: "strict",
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 Days
+      });
+
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+      });
+    } else {
+      res.status(401);
+      throw new Error("Email ou senha inválidos");
+    }
   });
 
   // @desc Logout user
