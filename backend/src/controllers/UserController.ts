@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import Controller from "./Controller";
 import User from "../models/userModel";
 import asyncHandler from "../middleware/asyncHandler";
+import UserValidationService from "../services/UserValidationService";
 
 export interface UserControllerInterface extends Controller {
   auth: (req: Request, res: Response, next: NextFunction) => void;
@@ -17,8 +18,11 @@ class UserController implements UserControllerInterface {
   // @desc Authenticate user
   // @route POST /api/users/auth
   // @access Public
+
+  protected _userValidationService = new UserValidationService();
+
   auth = asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password } = this._userValidationService.validateAuth(req);
 
     const user = await User.findOne({ email: email });
 
@@ -62,7 +66,8 @@ class UserController implements UserControllerInterface {
   // @route POST /api/users
   // @access Public
   register = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password } =
+      this._userValidationService.validateRegister(req);
 
     const userExists = await User.findOne({ email });
     if (userExists) {
@@ -112,15 +117,18 @@ class UserController implements UserControllerInterface {
   // @route PUT /api/users/profile
   // @access Private
   updateProfile = asyncHandler(async (req, res) => {
+    const { name, email, password } =
+      this._userValidationService.validateUpdateProfile(req);
+
     const user = await User.findById(req.user!._id);
 
     if (user) {
-      user.name = req.body.name || user.name;
-      user.email = req.body.email || user.email;
+      user.name = name || user.name;
+      user.email = email || user.email;
 
       // Only updates if password is new otherwise it will try to hash the current password that's already hashed
-      if (req.body.password) {
-        user.password = req.body.password;
+      if (password) {
+        user.password = password;
       }
 
       const updatedUser = await user.save();
