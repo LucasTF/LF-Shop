@@ -50,7 +50,12 @@ class UserController implements UserControllerInterface {
   // @route POST /api/users/logout
   // @access Public
   logout = asyncHandler(async (req, res) => {
-    res.send("logout user");
+    res.cookie("jwt", "", {
+      httpOnly: true,
+      expires: new Date(0),
+    });
+
+    res.status(200).json({ message: "Desconectado com sucesso" });
   });
 
   // @desc Register user
