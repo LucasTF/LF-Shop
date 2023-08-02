@@ -60,7 +60,12 @@ const Navbar = () => {
               </p>
             )}
           </ButtonLink>
-          <ButtonLink text="Login" icon={<FaUser />} mode="confirm" to="/" />
+          <ButtonLink
+            text="Login"
+            icon={<FaUser />}
+            mode="confirm"
+            to="/auth"
+          />
         </div>
       </nav>
     </>
