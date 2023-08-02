@@ -18,14 +18,16 @@ const LoginPage = () => {
   return (
     <Content>
       <h1 className="my-4 text-center font-bold text-4xl">Login</h1>
-      <Card className="p-6">
+      <Card className="p-6 md:w-1/5 md:mx-auto">
         <form
           className="flex flex-col gap-3"
           onSubmit={(e) => submitHandler(e)}
           method="post"
         >
           <div>
-            <label htmlFor="email">Email</label>
+            <label className="font-bold" htmlFor="email">
+              Email
+            </label>
             <Input
               className="my-1"
               id="email"
@@ -37,7 +39,9 @@ const LoginPage = () => {
             <p className="invisible text-sm">Campo inválido</p>
           </div>
           <div>
-            <label htmlFor="password">Senha</label>
+            <label className="font-bold" htmlFor="password">
+              Senha
+            </label>
             <Input
               className="my-1"
               id="password"
