@@ -34,7 +34,7 @@ class UserController implements UserControllerInterface {
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 Days
       });
 
-      res.json({
+      res.status(200).json({
         _id: user._id,
         name: user.name,
         email: user.email,
@@ -62,21 +62,79 @@ class UserController implements UserControllerInterface {
   // @route POST /api/users
   // @access Public
   register = asyncHandler(async (req, res) => {
-    res.send("register user");
+    const { name, email, password } = req.body;
+
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      res.status(400);
+      throw new Error("Usuário já existe");
+    }
+
+    const user = await User.create({
+      name,
+      email,
+      password,
+    });
+
+    if (user) {
+      res.status(201).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+      });
+    } else {
+      res.status(400);
+      throw new Error("Dados de usuário inválidos");
+    }
   });
 
   // @desc Get authenticated user information
   // @route GET /api/users/profile
   // @access Private
   profile = asyncHandler(async (req, res) => {
-    res.send("get user profile");
+    const user = await User.findById(req.user!._id);
+
+    if (user) {
+      res.status(200).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+      });
+    } else {
+      res.status(404);
+      throw new Error("Usuário não encontrado");
+    }
   });
 
   // @desc Update user profile
   // @route PUT /api/users/profile
   // @access Private
   updateProfile = asyncHandler(async (req, res) => {
-    res.send("update user profile");
+    const user = await User.findById(req.user!._id);
+
+    if (user) {
+      user.name = req.body.name || user.name;
+      user.email = req.body.email || user.email;
+
+      // Only updates if password is new otherwise it will try to hash the current password that's already hashed
+      if (req.body.password) {
+        user.password = req.body.password;
+      }
+
+      const updatedUser = await user.save();
+
+      res.status(200).json({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        isAdmin: updatedUser.isAdmin,
+      });
+    } else {
+      res.status(404);
+      throw new Error("Usuário não encontrado");
+    }
   });
 
   // @desc Get user by id
