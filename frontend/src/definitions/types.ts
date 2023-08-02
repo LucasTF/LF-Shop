@@ -26,3 +26,11 @@ export type Cart = {
   taxPrice: number;
   totalPrice: number;
 };
+
+export type User = {
+  _id: string;
+  name: string;
+  email: string;
+  password?: string;
+  isAdmin: boolean;
+};
