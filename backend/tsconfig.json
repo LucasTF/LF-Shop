@@ -6,6 +6,7 @@
     "allowJs": false,
     "rootDir": "./src",
     "outDir": "./build",
+    "typeRoots": ["./src/@types", "./src/node_modules/@types"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,

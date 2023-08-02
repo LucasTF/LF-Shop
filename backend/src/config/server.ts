@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 
 import productRoutes from "../routes/productRoutes";
 import userRoutes from "../routes/userRoutes";
@@ -12,6 +13,9 @@ const serverSetup = () => {
 
   // URLEncoded Body Parser Middleware
   server.use(express.urlencoded({ extended: true }));
+
+  // Cookie Parser Middleware
+  server.use(cookieParser());
 
   // Routes
   server.use("/api/products", productRoutes);
