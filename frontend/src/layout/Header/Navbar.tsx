@@ -1,17 +1,25 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { FaShoppingCart, FaUser, FaDoorOpen } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { CgClose } from "react-icons/cg";
 
-import { Button, ButtonLink } from "../../components/UI/Button/Button";
+import { useLogoutMutation } from "../../slices/usersApiSlice";
+import { logout } from "../../slices/authSlice";
 import { RootState } from "../../store";
+
+import { Button, ButtonLink } from "../../components/UI/Button/Button";
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
   const { cartItems } = useSelector((state: RootState) => state.cart);
   const { userInfo } = useSelector((state: RootState) => state.auth);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [logoutApiCall] = useLogoutMutation();
 
   const { pathname } = useLocation();
 
@@ -19,8 +27,14 @@ const Navbar = () => {
     setShowNav(false);
   }, [pathname]);
 
-  const logoutHandler = () => {
-    console.log("Logout");
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall("").unwrap();
+      dispatch(logout());
+      navigate("/auth");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   let drawerAnimation = showNav
@@ -69,7 +83,7 @@ const Navbar = () => {
             text={userInfo ? userInfo.name : "Login"}
             icon={<FaUser />}
             mode={userInfo ? "default" : "confirm"}
-            to="/auth"
+            to={userInfo ? "/profile" : "/auth"}
           />
           {userInfo && (
             <Button
