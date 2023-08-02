@@ -1,26 +1,14 @@
-import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import connectDB from "./config/db";
-
-import productRoutes from "./routes/productRoutes";
-import userRoutes from "./routes/userRoutes";
-import { errorHandler, notFound } from "./middleware/errorMiddleware";
+import serverSetup from "./config/server";
 
 const port = process.env.PORT || 5000;
 
+// Database
 connectDB();
 
-const app = express();
+// Server
+const server = serverSetup();
 
-app.use("/api/products", productRoutes);
-app.use("/api/users", userRoutes);
-
-app.use(notFound);
-app.use(errorHandler);
-
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
-
-app.listen(port, () => console.log(`Server running on port ${port}`));
+server.listen(port, () => console.log(`Server running on port ${port}`));
