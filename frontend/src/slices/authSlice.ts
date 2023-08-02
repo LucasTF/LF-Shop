@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { User } from "../definitions/types";
 
-const initialState = {
+type UserState = { userInfo?: User };
+
+const initialState: UserState = {
   userInfo: localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo")!)
     : null,

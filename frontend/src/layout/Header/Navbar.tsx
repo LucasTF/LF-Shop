@@ -1,22 +1,27 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { FaShoppingCart, FaUser } from "react-icons/fa";
+import { FaShoppingCart, FaUser, FaDoorOpen } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { CgClose } from "react-icons/cg";
 
-import { ButtonLink } from "../../components/UI/Button/Button";
+import { Button, ButtonLink } from "../../components/UI/Button/Button";
 import { RootState } from "../../store";
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
   const { cartItems } = useSelector((state: RootState) => state.cart);
+  const { userInfo } = useSelector((state: RootState) => state.auth);
 
   const { pathname } = useLocation();
 
   useEffect(() => {
     setShowNav(false);
   }, [pathname]);
+
+  const logoutHandler = () => {
+    console.log("Logout");
+  };
 
   let drawerAnimation = showNav
     ? "translate-y-0 opacity-1"
@@ -61,11 +66,20 @@ const Navbar = () => {
             )}
           </ButtonLink>
           <ButtonLink
-            text="Login"
+            text={userInfo ? userInfo.name : "Login"}
             icon={<FaUser />}
-            mode="confirm"
+            mode={userInfo ? "default" : "confirm"}
             to="/auth"
           />
+          {userInfo && (
+            <Button
+              className="hover:text-red-600"
+              type="button"
+              icon={<FaDoorOpen />}
+              text="Sair"
+              onClick={logoutHandler}
+            />
+          )}
         </div>
       </nav>
     </>
