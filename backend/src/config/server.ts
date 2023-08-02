@@ -5,23 +5,29 @@ import userRoutes from "../routes/userRoutes";
 import { errorHandler, notFound } from "../middleware/errorMiddleware";
 
 const serverSetup = () => {
-  const app = express();
+  const server = express();
 
   // Routes
-  app.use("/api/products", productRoutes);
-  app.use("/api/users", userRoutes);
+  server.use("/api/products", productRoutes);
+  server.use("/api/users", userRoutes);
 
   // 404 Not Found Handler Middleware
-  app.use(notFound);
+  server.use(notFound);
 
   // Error Handler Middleware
-  app.use(errorHandler);
+  server.use(errorHandler);
 
-  app.get("/", (req, res) => {
+  // JSON Body Parser Middleware
+  server.use(express.json());
+
+  // URLEncoded Body Parser Middleware
+  server.use(express.urlencoded({ extended: true }));
+
+  server.get("/", (req, res) => {
     res.send("API is running...");
   });
 
-  return app;
+  return server;
 };
 
 export default serverSetup;
