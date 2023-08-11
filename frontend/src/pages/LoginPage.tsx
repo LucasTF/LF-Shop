@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -13,9 +14,17 @@ import { Button } from "../components/UI/Button/Button";
 import Input from "../components/UI/Form/Input";
 import Message from "../components/UI/Message/Message";
 
+type Inputs = {
+  email: string;
+  password: string;
+};
+
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,8 +41,7 @@ const LoginPage = () => {
     if (userInfo) navigate(redirect);
   }, [userInfo, redirect, navigate]);
 
-  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const submitHandler: SubmitHandler<Inputs> = async ({ email, password }) => {
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
@@ -49,12 +57,10 @@ const LoginPage = () => {
       <Card className="p-6 md:mx-auto md:w-2/5 2xl:w-1/5">
         <form
           className="flex flex-col gap-3"
-          onSubmit={(e) => submitHandler(e)}
+          onSubmit={handleSubmit(submitHandler)}
           method="post"
         >
-          <Message type="danger" className={!isError ? "hidden" : ""}>
-            Email ou senha inválidos
-          </Message>
+          {isError && <Message type="danger">Email ou senha inválidos</Message>}
           <div>
             <label className="font-bold" htmlFor="email">
               Email
@@ -64,10 +70,18 @@ const LoginPage = () => {
               id="email"
               type="email"
               placeholder="seu@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              isInvalid={errors.email && true}
+              {...register("email", {
+                required: true,
+                minLength: 3,
+                maxLength: 30,
+              })}
             />
-            <p className="invisible text-sm">Campo inválido</p>
+            {errors.email && (
+              <p className="mt-2 text-sm font-bold text-red-600">
+                Email inválido
+              </p>
+            )}
           </div>
           <div>
             <label className="font-bold" htmlFor="password">
@@ -78,10 +92,18 @@ const LoginPage = () => {
               id="password"
               type="password"
               placeholder="senha"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              isInvalid={errors.password && true}
+              {...register("password", {
+                required: true,
+                minLength: 3,
+                maxLength: 30,
+              })}
             />
-            <p className="invisible text-sm">Campo inválido</p>
+            {errors.password && (
+              <p className="mt-2 text-sm font-bold text-red-600">
+                Senha inválida
+              </p>
+            )}
           </div>
           {isLoading ? (
             <Loader />
