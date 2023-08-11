@@ -53,7 +53,6 @@ const RegisterPage = () => {
     try {
       await registerMutation({ name, email, password }).unwrap();
       setHasRegistered(true);
-      // navigate(redirect);
     } catch (error) {
       console.log(error);
     }
