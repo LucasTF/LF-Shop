@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { BsFillPersonCheckFill } from "react-icons/bs";
 
-import { useRegisterMutation } from "../slices/usersApiSlice";
+import { useRegisterMutation } from "../queries/userQueries";
 import { RootState } from "../store";
 
 import Content from "../layout/Content/Content";

@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useLoginMutation } from "../slices/usersApiSlice";
+import { useLoginMutation } from "../queries/userQueries";
 import { setCredentials } from "../slices/authSlice";
 import { RootState } from "../store";
 

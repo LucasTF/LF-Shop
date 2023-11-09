@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { FaArrowLeft } from "react-icons/fa";
 
-import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
+import { useGetProductDetailsQuery } from "../queries/productQueries";
 
 import { ButtonLink } from "../components/UI/Button/Button";
 import Content from "../layout/Content/Content";

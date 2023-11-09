@@ -1,4 +1,4 @@
-import { useGetProductsQuery } from "../slices/productsApiSlice";
+import { useGetProductsQuery } from "../queries/productQueries";
 
 import Product from "../components/Home/Product";
 import Loader from "../components/UI/Loader/Loader";

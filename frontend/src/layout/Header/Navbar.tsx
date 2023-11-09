@@ -5,7 +5,7 @@ import { FaShoppingCart, FaUser, FaDoorOpen } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { CgClose } from "react-icons/cg";
 
-import { useLogoutMutation } from "../../slices/usersApiSlice";
+import { useLogoutMutation } from "../../queries/userQueries";
 import { logout } from "../../slices/authSlice";
 import { RootState } from "../../store";
 
