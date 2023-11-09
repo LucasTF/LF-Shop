@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../hooks";
+
 import { FaArrowLeft } from "react-icons/fa";
 
 import { useGetProductDetailsQuery } from "../queries/productQueries";
@@ -15,7 +16,7 @@ const ProductPage = () => {
   const { id: productId } = useParams();
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const {
     data: product,

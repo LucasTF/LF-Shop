@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../hooks";
 
 import { useLoginMutation } from "../queries/userQueries";
 import { setCredentials } from "../slices/authSlice";
-import { RootState } from "../store";
 
 import Content from "../layout/Content/Content";
 import Card from "../components/UI/Card/Card";
@@ -26,12 +25,12 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [login, { isLoading, isError }] = useLoginMutation();
 
-  const { userInfo } = useSelector((state: RootState) => state.auth);
+  const { userInfo } = useAppSelector(state => state.auth);
 
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);

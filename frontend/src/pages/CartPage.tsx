@@ -1,8 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../hooks";
 import { FaCreditCard, FaTrash } from "react-icons/fa";
 
-import { RootState } from "../store";
 import { removeFromCart, clearCart } from "../slices/cartSlice";
 import { BRLFormatter } from "../utils/currencyFormatter";
 
@@ -13,9 +12,9 @@ import { Button } from "../components/UI/Button/Button";
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const cart = useSelector((state: RootState) => state.cart);
+  const cart = useAppSelector(state => state.cart);
   const cartItems = cart.cartItems;
 
   const cartTotalPrice = cartItems.reduce(

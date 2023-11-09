@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../hooks";
 import { BsFillPersonCheckFill } from "react-icons/bs";
 
 import { useRegisterMutation } from "../queries/userQueries";
-import { RootState } from "../store";
 
 import Content from "../layout/Content/Content";
 import Card from "../components/UI/Card/Card";
@@ -35,7 +34,7 @@ const RegisterPage = () => {
 
   const [registerMutation, { isLoading, isError }] = useRegisterMutation();
 
-  const { userInfo } = useSelector((state: RootState) => state.auth);
+  const { userInfo } = useAppSelector(state => state.auth);
 
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
